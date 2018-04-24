@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# Swap files
+*.swp 
+
+# Directories
+build
+cmake_modules
+images
+
+
