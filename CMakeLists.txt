@@ -11,7 +11,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g3 -gdwarf-4")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON) 
 set(CMAKE_VERBOSE_MAKEFILE TRUE) 
 
-project (SDL_infinit_run)
+project (SFML_infinit_run)
 enable_language(CXX)
 
 set(SOURCE_FILES
