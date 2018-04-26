@@ -15,7 +15,9 @@ project (SFML_infinit_run)
 enable_language(CXX)
 
 set(SOURCE_FILES
-        src/main/main.cpp)
+        src/main/main.cpp
+	src/ColisionDetection.cpp
+	src/WallsRepositioning.cpp)
 
 set(EXECUTABLE_NAME "IR")
 add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
