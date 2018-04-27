@@ -8,12 +8,14 @@
 
 #include "ColisionDetection.hpp"
 #include "WallsRepositioning.hpp"
+#include "Movement.hpp"
 
 int main() {
 
     //Render Window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Infiniter Run", sf::Style::Default);
     window.setFramerateLimit(150);
+    window.setKeyRepeatEnabled(false);
 
     //View configuartion
     sf::View baseView(sf::FloatRect(sf::Vector2f(-100, 0), sf::Vector2f(800, 600)));
@@ -26,18 +28,21 @@ int main() {
     character.setPosition(0, 420);
 
     //Walls Declaration
-    sf::RectangleShape wall1(sf::Vector2f(50, 100));
+    sf::RectangleShape wall1(sf::Vector2f(25, 100));
     wall1.setFillColor(sf::Color::Green);
     wall1.setPosition(0, 420);
 
-    sf::RectangleShape wall2(sf::Vector2f(50, 100));
+    sf::RectangleShape wall2(sf::Vector2f(15, 60));
     wall2.setFillColor(sf::Color::Blue);
     wall2.setPosition(0, 420);
 
-    sf::RectangleShape wall3(sf::Vector2f(50, 100));
+    sf::RectangleShape wall3(sf::Vector2f(45, 60));
     wall3.setFillColor(sf::Color::Black);
     wall3.setPosition(0, 420);
 
+    //Movement
+    Movement m1(1, 420, 200);
+    
     //Main game loop
     while(window.isOpen()){
 
@@ -53,15 +58,20 @@ int main() {
                     break; 
 
             }
+        }
 
+        //Movment control
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+            if(!m1.getGoesUpStatus() && !m1.getGoesDownStatus())        
+                m1.Jump();
+
+        } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+            if(!m1.getGoesUpStatus() && m1.getGoesDownStatus())
+                m1.updateYPosition();
         }
 
         // Setting up view
         window.setView(baseView);
-
-        ///Section responsible for displaying every single frame
-        //Clear front buffer and fill it white color
-        window.clear(sf::Color::White);
 
         //Colision Detection
         colisionDetection(character, wall1);  
@@ -72,18 +82,22 @@ int main() {
         wallsRepositioning(wall1, character, window.getSize().x);
         wallsRepositioning(wall2, character, window.getSize().x);
         wallsRepositioning(wall3, character, window.getSize().x);
+
+        //Move Character
+        character.move(1, m1.updateYPosition());
+
+        //Move View
+        baseView.move(1, 0);
         
+        ///Section responsible for displaying every single frame
+        //Clear front buffer and fill it white color
+        window.clear(sf::Color::White);
+
         //Draw character and walls
         window.draw(character);
         window.draw(wall1);
         window.draw(wall2);
         window.draw(wall3);
-
-        //Move Character
-        character.move(1, 0);
-
-        //Move View
-        baseView.move(1, 0);
 
         //Display rendered frame
         window.display();
