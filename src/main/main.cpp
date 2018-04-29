@@ -5,10 +5,12 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 #include "ColisionDetection.hpp"
 #include "WallsRepositioning.hpp"
 #include "Movement.hpp"
+#include "Animations.hpp"
 
 int main() {
 
@@ -20,29 +22,45 @@ int main() {
     //View configuartion
     sf::View baseView(sf::FloatRect(sf::Vector2f(-100, 0), sf::Vector2f(800, 600)));
     
-    sf::Event event;
+    //Add textures
+    sf::Texture runTexture;
+    if(!runTexture.loadFromFile("/home/konrad/Documents/c++/githubupdate/sfml-infinit-run/images/run.png")){
+        std::cout << "Cannot Load The Run Texture." << std::endl;
+    }
 
     //Character Declaration
     sf::RectangleShape character(sf::Vector2f(50, 100));
-    character.setFillColor(sf::Color(sf::Color::Red));
+    character.setFillColor(sf::Color(sf::Color::White));
     character.setPosition(0, 420);
+    character.setTexture(&runTexture);
 
     //Walls Declaration
-    sf::RectangleShape wall1(sf::Vector2f(25, 100));
+    sf::RectangleShape wall1(sf::Vector2f(25, 70));
     wall1.setFillColor(sf::Color::Green);
-    wall1.setPosition(0, 420);
+    wall1.setPosition(0, 450);
 
-    sf::RectangleShape wall2(sf::Vector2f(15, 60));
+    sf::RectangleShape wall2(sf::Vector2f(15, 50));
     wall2.setFillColor(sf::Color::Blue);
-    wall2.setPosition(0, 420);
+    wall2.setPosition(0, 470);
 
     sf::RectangleShape wall3(sf::Vector2f(45, 60));
     wall3.setFillColor(sf::Color::Black);
-    wall3.setPosition(0, 420);
+    wall3.setPosition(0, 460);
 
     //Movement
     Movement m1(1, 420, 200);
+
+    //Animations
+    sf::IntRect rect(0,0,0,0);
+    Animations runAnimation(runTexture, 2, 5, 0.1);
     
+    //Clock
+    sf::Clock cloc;
+    sf::Time t1;
+
+    //Events handle
+    sf::Event event;
+
     //Main game loop
     while(window.isOpen()){
 
@@ -66,8 +84,8 @@ int main() {
                 m1.Jump();
 
         } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-            if(!m1.getGoesUpStatus() && m1.getGoesDownStatus())
-                m1.updateYPosition();
+            // if(!m1.getGoesUpStatus() && m1.getGoesDownStatus())
+            //     m1.updateYPosition();
         }
 
         // Setting up view
@@ -88,7 +106,16 @@ int main() {
 
         //Move View
         baseView.move(1, 0);
+
+        //Update Animations
+        t1 = cloc.getElapsedTime();
+        runAnimation.updateCurrentTime(t1.asSeconds());
+        runAnimation.updateTexture(rect, character);
+        character.setTextureRect(rect);
         
+        if(t1.asSeconds() >= 0.1)
+            cloc.restart();
+
         ///Section responsible for displaying every single frame
         //Clear front buffer and fill it white color
         window.clear(sf::Color::White);
