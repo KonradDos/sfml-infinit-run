@@ -4,6 +4,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-void colisionDetection(sf::RectangleShape &character, sf::RectangleShape &wall);
+bool colisionDetection(sf::RectangleShape &character, sf::RectangleShape &wall);
 
 #endif

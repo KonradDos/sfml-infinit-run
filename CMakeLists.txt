@@ -20,6 +20,7 @@ set(SOURCE_FILES
 	src/WallsRepositioning.cpp
     src/Movement.cpp
     src/Animations.cpp
+    src/InitialValues.cpp
 )
 
 set(EXECUTABLE_NAME "IR")

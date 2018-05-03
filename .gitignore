@@ -37,7 +37,6 @@
 # Directories
 build
 cmake_modules
-images
 .vscode
 
 
