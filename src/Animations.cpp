@@ -29,7 +29,6 @@ void Animations::updateTexture(sf::IntRect &rect, sf::RectangleShape &character)
                 rect.height = this->textureUnitHeight;       
 
                 this->currentRowImage++;
-
             } 
         }
     }
