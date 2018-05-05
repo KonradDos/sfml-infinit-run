@@ -2,8 +2,8 @@
 
 Animations::Animations(const sf::Texture &texture, int numberOfRows, int imagesInARow, float durationBetweenTexChange) :
     texture(texture), numberOfImagesInARow(imagesInARow), numberOfRows(numberOfRows), timeDurationBetweenTexChange(durationBetweenTexChange) {
-        this->textureUnitHeight = texture.getSize().y/numberOfRows;
-        this->textureUnitWidth = texture.getSize().x/numberOfImagesInARow;
+        this->textureUnitHeight = (texture.getSize().y / numberOfRows);
+        this->textureUnitWidth = (texture.getSize().x / numberOfImagesInARow);
         this->currentTime = 0.0; 
         this->currentRow = 0;
         this->currentRowImage = 0;
