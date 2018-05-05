@@ -2,8 +2,6 @@
 #define Animations_hpp
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
-#include <iomanip>
 
 class Animations {
     public:

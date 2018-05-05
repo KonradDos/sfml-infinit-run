@@ -2,7 +2,6 @@
 #define Movement_hpp
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
 
 class Movement {
     public:

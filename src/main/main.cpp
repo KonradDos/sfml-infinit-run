@@ -2,12 +2,11 @@
 /// SFML 2.3.2 
 /// C++ 11
 ////////////////////////////////////////////////////
-
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-#include "ColisionDetection.hpp"
+#include "CollisionDetection.hpp"
 #include "WallsRepositioning.hpp"
 #include "Movement.hpp"
 #include "Animations.hpp"
@@ -127,9 +126,9 @@ int main() {
             window.close();
         }
 
-        //Colision Detection
-        if( colisionDetection(character, wall1) ||  colisionDetection(character, wall2) ||
-            colisionDetection(character, wall3) ) {
+        //Collision Detection
+        if( CollisionDetection(character, wall1) ||  CollisionDetection(character, wall2) ||
+            CollisionDetection(character, wall3) ) {
 
             window.setView(gameOver);
 
