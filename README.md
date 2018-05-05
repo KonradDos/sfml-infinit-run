@@ -1,7 +1,7 @@
 # sfml-infinit-run
 Change the texture and font path in main.cpp before running the game.
 
-## Versions
+## Used Technologies
 
 * SFML 2.3.2 
 * C++ 11
